@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+.tmp-loader-ref/
+.tmp-template-ref/
+.tmp-ref/
 
 # debug
 npm-debug.log*
