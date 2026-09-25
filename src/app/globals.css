@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #061428;
+  --bg-deep: #030b18;
+  --bg-soft: #0b1c36;
+  --white: #ffffff;
+  --fg: #f4f7fb;
+  --fg-muted: #f4f7fbb8;
+  --fg-dim: #f4f7fb7a;
+  --ink: #0a1628;
+  --ink-muted: #4a5a70;
+  --accent: #ff4f2d;
+  --accent-soft: #ff7a61;
+  --line: rgba(244, 247, 251, 0.14);
+  --line-dark: rgba(10, 22, 40, 0.12);
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 251, 0.22);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-loader: var(--font-loader);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Keep resets in @layer base so Tailwind utilities can override them
+   (unlayered `a { color: inherit }` was wiping link text colors). */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-deep);
+    color: var(--fg);
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg-deep);
+    color: var(--fg);
+    font-family: var(--font-body), system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  html.is-loading,
+  html.is-loading body {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .will-change-transform,
+    [data-silk-blob],
+    [data-loader-char],
+    .animate-tech-marquee {
+      animation: none !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes tech-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@utility animate-tech-marquee {
+  animation: tech-marquee 45s linear infinite;
+  will-change: transform;
 }
