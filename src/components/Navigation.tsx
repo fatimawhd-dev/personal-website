@@ -50,7 +50,7 @@ export function Navigation() {
         ref={headerRef}
         className="fixed inset-x-0 top-0 z-70 px-[clamp(1.25rem,4vw,3rem)] py-[1.1rem] transition-[background,border-color,backdrop-filter] duration-300 data-scrolled:border-b data-scrolled:border-(--line) data-scrolled:bg-[rgba(3,11,24,0.72)] data-scrolled:backdrop-blur-lg"
       >
-        <div className="mx-auto grid max-w-350 grid-cols-[1fr_auto_1fr] items-center gap-4">
+        <div className="mx-auto grid max-w-350 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-[clamp(0.75rem,2vw,1.5rem)]">
           <a
             href="#top"
             data-nav-brand
@@ -59,19 +59,22 @@ export function Navigation() {
             {site.shortName}
           </a>
 
-          <nav className="hidden items-center gap-[1.6rem] min-[960px]:flex" aria-label="Primary">
+          <nav
+            className="hidden min-w-0 items-center justify-center gap-[clamp(0.45rem,1vw,1.6rem)] min-[1080px]:flex"
+            aria-label="Primary"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-[0.68rem] tracking-[0.18em] uppercase text-(--fg-muted) transition-colors duration-200 hover:text-fg"
+                className="text-[0.64rem] tracking-[0.12em] whitespace-nowrap uppercase text-(--fg-muted) transition-colors duration-200 hover:text-fg min-[1280px]:text-[0.68rem] min-[1280px]:tracking-[0.16em]"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="hidden items-center justify-end gap-[0.85rem] min-[960px]:flex">
+          <div className="hidden shrink-0 items-center justify-end gap-[clamp(0.45rem,1vw,0.85rem)] min-[1080px]:flex">
             <a href={site.resumeUrl} download className={btnGlass}>
               Resume
               <span className={btnGlassDot} aria-hidden>
@@ -88,12 +91,26 @@ export function Navigation() {
 
           <button
             type="button"
-            className="col-start-3 justify-self-end grid size-10 place-items-center border-0 bg-transparent text-fg min-[960px]:hidden"
+            className="col-start-3 grid size-12 place-items-center justify-self-end border-0 bg-transparent text-fg min-[1080px]:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            <span aria-hidden>{open ? "✕" : "☰"}</span>
+            <svg
+              aria-hidden
+              viewBox="0 0 24 24"
+              className="size-8"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+            >
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M3 7h18M3 12h18M3 17h18" />
+              )}
+            </svg>
           </button>
         </div>
       </header>

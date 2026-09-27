@@ -13,7 +13,7 @@ export const sectionLabel =
   "m-0 text-[0.72rem] font-semibold tracking-[0.2em] text-accent uppercase";
 
 export const btnPill =
-  "inline-flex items-center gap-[0.55rem] min-h-12 py-1 pr-[0.3rem] pl-[1.35rem] border-0 rounded-full bg-white text-accent cursor-pointer font-inherit transition-[transform,box-shadow] duration-300 hover:-translate-y-px hover:shadow-[0_10px_28px_rgba(0,0,0,0.22)]";
+  "inline-flex shrink-0 items-center gap-[0.55rem] min-h-12 py-1 pr-[0.3rem] pl-[1.35rem] border-0 rounded-full bg-white text-accent whitespace-nowrap cursor-pointer font-inherit transition-[transform,box-shadow] duration-300 hover:-translate-y-px hover:shadow-[0_10px_28px_rgba(0,0,0,0.22)]";
 
 export const btnPillLabel =
   "inline-flex items-center justify-center p-0 rounded-none bg-transparent text-accent text-[0.92rem] font-semibold";
@@ -22,7 +22,7 @@ export const btnPillArrow =
   "inline-flex items-center justify-center size-[2.45rem] rounded-full bg-[rgba(255,79,45,0.1)] text-accent transition-[transform,background] duration-300 group-hover/pill:translate-x-0.5 group-hover/pill:bg-[rgba(255,79,45,0.16)]";
 
 export const btnGlass =
-  "inline-flex items-center gap-[0.55rem] min-h-12 py-1 pr-[0.3rem] pl-[1.35rem] rounded-full border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[14px] text-fg text-[0.92rem] font-semibold tracking-[0.02em] transition-[background,border-color] duration-300 hover:bg-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.4)]";
+  "inline-flex shrink-0 items-center gap-[0.55rem] min-h-12 py-1 pr-[0.3rem] pl-[1.35rem] rounded-full border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[14px] text-fg text-[0.92rem] font-semibold tracking-[0.02em] whitespace-nowrap transition-[background,border-color] duration-300 hover:bg-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.4)]";
 
 export const btnGlassDot =
   "inline-flex items-center justify-center size-[2.45rem] rounded-full border border-[var(--glass-border)] bg-[rgba(255,255,255,0.06)] text-fg";
