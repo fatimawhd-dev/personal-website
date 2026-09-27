@@ -111,7 +111,7 @@ export function Message() {
       className="relative z-20 flex min-h-svh items-center justify-center overflow-hidden bg-[#061428] px-[clamp(1.25rem,4vw,3.5rem)]"
     >
       <div className="relative mx-auto flex w-full max-w-350 flex-col items-center py-20 md:py-28">
-        <div className="relative flex flex-col items-center justify-center gap-14 font-[family-name:var(--font-loader),Arial_Black,sans-serif] text-5xl leading-none font-medium tracking-[-0.35vw] uppercase md:gap-24 md:text-6xl xl:text-7xl">
+        <div className="relative flex flex-col items-center justify-center gap-2 font-[family-name:var(--font-loader),Arial_Black,sans-serif] text-5xl leading-none font-medium tracking-[-0.35vw] uppercase md:gap-24 md:text-6xl xl:text-7xl">
           <h2 className="m-0 max-w-xs text-center leading-none md:max-w-xl xl:max-w-2xl">
             {splitWords(message.lineOne, "a")}
           </h2>
@@ -119,7 +119,7 @@ export function Message() {
 
           <div
             data-msg-badge
-            className="absolute z-10 -translate-y-8 rotate-3 border-[0.5vw] border-[#061428] will-change-[clip-path] md:-translate-y-12 xl:-translate-y-8"
+            className="relative z-10 rotate-3 border-[0.5vw] border-[#061428] will-change-[clip-path] md:absolute md:-translate-y-12 xl:-translate-y-8"
             style={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" }}
           >
             <div className="grid place-items-center bg-[#f3efe6] px-[0.4em] pt-[0.12em] pb-[0.22em]">

@@ -99,7 +99,7 @@ export function Contact() {
       className="relative z-2 bg-white p-[clamp(1.5rem,4vw,2.5rem)]"
     >
       <div
-        className="relative z-10 flex min-h-[min(80svh,840px)] flex-col justify-between gap-[clamp(0.75rem,2vw,1.25rem)] overflow-hidden rounded-[clamp(1.75rem,4vw,3rem)] px-[clamp(1.5rem,4vw,3.5rem)] py-[clamp(1.5rem,4vw,2.5rem)] text-fg"
+        className="relative z-10 flex flex-col gap-6 overflow-hidden rounded-[clamp(1.75rem,4vw,3rem)] px-[clamp(1.5rem,4vw,3.5rem)] py-[clamp(1.5rem,4vw,2.5rem)] text-fg min-[900px]:min-h-[min(80svh,840px)] min-[900px]:justify-between min-[900px]:gap-[clamp(0.75rem,2vw,1.25rem)]"
         style={{
           backgroundImage: silkGradient,
           backgroundSize: "140% 140%",
@@ -126,7 +126,7 @@ export function Contact() {
 
         <div
           data-contact-anim
-          className="mx-auto grid w-full max-w-275 grid-cols-2 gap-x-6 gap-y-8 text-center opacity-0 min-[900px]:grid-cols-3 min-[900px]:gap-8"
+          className="mx-auto grid w-full max-w-275 grid-cols-3 gap-x-3 text-center opacity-0 min-[900px]:gap-8"
         >
           {columns.map((col) => (
             <div key={col.title}>

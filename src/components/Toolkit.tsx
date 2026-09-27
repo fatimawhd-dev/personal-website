@@ -35,15 +35,15 @@ function MarqueeTrack({ ariaHidden = false }: { ariaHidden?: boolean }) {
 
 function TechPill({ name, file }: { name: string; file: string }) {
   return (
-    <span className="inline-flex items-center gap-2.5 rounded-full bg-[#214264] py-1.5 pr-4 pl-1.5 text-[0.8rem] font-semibold tracking-[0.01em] text-white">
-      <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white">
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#214264] py-1 pr-2.5 pl-1 text-[0.68rem] font-semibold tracking-[0.01em] text-white min-[800px]:gap-2.5 min-[800px]:py-1.5 min-[800px]:pr-4 min-[800px]:pl-1.5 min-[800px]:text-[0.8rem]">
+      <span className="grid size-5 shrink-0 place-items-center rounded-full bg-white min-[800px]:size-7">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`/tech/${file}.svg`}
           alt=""
           width={14}
           height={14}
-          className="size-3.5"
+          className="size-2.5 min-[800px]:size-3.5"
           loading="lazy"
           decoding="async"
         />
@@ -90,7 +90,7 @@ export function Toolkit() {
                   {cat.description}
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-wrap gap-1.5 min-[800px]:gap-2.5">
                 {cat.items.map((item) => (
                   <TechPill key={item.name} name={item.name} file={item.file} />
                 ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { impact } from "@/data/content";
@@ -13,21 +13,10 @@ gsap.registerPlugin(ScrollTrigger);
  * - cream radial field + drip transition
  * - rising title chars + clip-path badge
  * - rising paragraph words
- * - bottom pill stats bar (3 on mobile, all on desktop)
+ * - bottom pill stats bar (two rows on mobile, one row on desktop)
  */
 export function Impact() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [stats, setStats] = useState(impact.stats);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    const sync = () => {
-      setStats(mq.matches ? impact.stats.slice(0, 3) : impact.stats);
-    };
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -98,7 +87,7 @@ export function Impact() {
       id="impact"
       ref={sectionRef}
       aria-label="Impact"
-      className="relative z-20 min-h-svh overflow-hidden 2xl:h-[120svh]"
+      className="relative z-20 overflow-hidden md:min-h-svh 2xl:h-[120svh]"
       style={{
         backgroundImage: "radial-gradient(circle at 50% 40%, #f7f3eb, #d8e0ec)",
       }}
@@ -124,7 +113,7 @@ export function Impact() {
         }}
       />
 
-      <div className="relative z-10 flex flex-col justify-between gap-10 px-5 pt-32 pb-52 md:flex-row md:items-start md:justify-between md:gap-10 md:px-10 md:pt-40 md:pb-56 xl:pt-44">
+      <div className="relative z-10 flex flex-col justify-between gap-6 px-5 pt-20 pb-2 md:flex-row md:items-start md:justify-between md:gap-10 md:px-10 md:pt-40 md:pb-56 xl:pt-44">
         <div className="relative inline-block md:translate-y-8">
           <div className="relative flex flex-col items-start justify-center gap-4 font-[family-name:var(--font-loader),Arial_Black,sans-serif] text-[clamp(2.4rem,6vw,5.5rem)] leading-[0.92] font-bold tracking-[-0.04em] uppercase md:gap-5">
             <div className="overflow-hidden">
@@ -172,23 +161,23 @@ export function Impact() {
         </div>
       </div>
 
-      <div className="absolute bottom-5 z-20 w-full px-5 md:bottom-16 md:px-0">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border-[0.5vw] border-[#dce3ee] bg-[#eef2f7] px-5 py-5 md:px-0 md:py-8">
-          {stats.map((stat, index) => (
+      <div className="relative z-20 mt-8 mb-6 w-full px-5 md:absolute md:bottom-16 md:mt-0 md:mb-0 md:px-0">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-4 rounded-[1.75rem] border-[0.5vw] border-[#dce3ee] bg-[#eef2f7] px-3 py-4 md:flex md:items-center md:justify-between md:rounded-full md:px-0 md:py-8">
+          {impact.stats.map((stat, index) => (
             <div
               key={stat.label}
-              className="relative flex flex-1 flex-col items-center justify-center text-center"
+              className="relative flex flex-1 flex-col items-center justify-center px-1 text-center"
             >
               <div>
-                <p className="m-0 text-sm text-[#4a5a70] md:text-lg">{stat.label}</p>
-                <p className="mt-2 font-[family-name:var(--font-loader),Arial_Black,sans-serif] text-2xl leading-none font-bold tracking-tighter text-[#061428] md:text-4xl">
+                <p className="m-0 text-xs text-[#4a5a70] md:text-lg">{stat.label}</p>
+                <p className="mt-1.5 font-[family-name:var(--font-loader),Arial_Black,sans-serif] text-xl leading-none font-bold tracking-tighter text-[#061428] md:mt-2 md:text-4xl">
                   {stat.amount}
                 </p>
               </div>
-              {index !== stats.length - 1 && (
+              {index !== impact.stats.length - 1 && (
                 <div
                   aria-hidden
-                  className="absolute top-1/2 right-0 h-16 w-px -translate-y-1/2 bg-[#9aabc0] md:h-24"
+                  className="absolute top-1/2 right-0 hidden h-16 w-px -translate-y-1/2 bg-[#9aabc0] md:block md:h-24"
                 />
               )}
             </div>
