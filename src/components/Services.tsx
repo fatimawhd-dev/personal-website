@@ -158,7 +158,15 @@ export function Services() {
         lift,
         { y: 0 },
         {
-          y: () => -peek() * (cards.length - 1),
+          y: () => {
+            const full = peek() * (cards.length - 1);
+            // Desktop keeps the full lift. On a phone the stack is shorter than
+            // the screen, so only lift what would actually overflow — otherwise
+            // the card jumps up and leaves a white gap above the next section.
+            if (window.matchMedia("(min-width: 860px)").matches) return -full;
+            const overflow = lift.scrollHeight - pin.clientHeight;
+            return -Math.min(full, Math.max(0, overflow));
+          },
           ease: "none",
           force3D: true,
           scrollTrigger: {
@@ -180,7 +188,7 @@ export function Services() {
     <section
       id="services"
       aria-label="Services"
-      className="relative z-2 bg-white pt-[clamp(3.5rem,8vw,5.5rem)] text-ink"
+      className="relative z-2 bg-white pt-[clamp(3.5rem,8vw,5.5rem)] text-ink [--stack-card:27.5rem] min-[860px]:[--stack-card:31.25rem]"
       style={
         {
           "--services-nav": "4.75rem",
@@ -189,10 +197,10 @@ export function Services() {
         } as CSSProperties
       }
     >
-      <div ref={trackRef} className="relative h-[240vh]">
+      <div ref={trackRef} className="relative h-[225vh] min-[860px]:h-[240vh]">
         <div
           ref={pinRef}
-          className="sticky top-(--services-nav) flex h-[calc(100svh-var(--services-nav))] flex-col overflow-hidden bg-white"
+          className="sticky top-(--services-nav) flex h-auto flex-col overflow-hidden bg-white pb-18 min-[860px]:h-[calc(100svh-var(--services-nav))] min-[860px]:pb-0"
         >
           <div data-services-lift className="will-change-transform">
             <div className="w-full px-[clamp(1.25rem,4vw,3.5rem)] pt-[0.35rem] pb-[clamp(1.1rem,3vw,1.75rem)] text-left">
@@ -204,13 +212,13 @@ export function Services() {
 
             <div
               data-services-stage
-              className="relative mx-[clamp(0.65rem,1.5vw,1.1rem)] h-[calc((var(--stack-count)-1)*var(--stack-peek)+500px)] overflow-hidden"
+              className="relative mx-[clamp(0.65rem,1.5vw,1.1rem)] h-[calc((var(--stack-count)-1)*var(--stack-peek)+var(--stack-card))] overflow-hidden"
             >
               {services.map((service, i) => (
                 <article
                   key={service.title}
                   data-service-card
-                  className="absolute inset-x-0 grid h-125 grid-cols-1 content-start items-start gap-5 rounded-[clamp(1.6rem,3.5vw,2.75rem)] p-[clamp(1.35rem,3vw,2rem)_clamp(1.4rem,4vw,3.25rem)_clamp(1.5rem,4vw,2.5rem)] text-fg shadow-[0_-12px_40px_rgba(3,11,24,0.08)] will-change-transform min-[860px]:grid-cols-[1.2fr_0.8fr] min-[860px]:gap-8"
+                  className="absolute inset-x-0 grid h-(--stack-card) grid-cols-1 content-start items-start gap-5 rounded-[clamp(1.6rem,3.5vw,2.75rem)] p-[clamp(1.35rem,3vw,2rem)_clamp(1.4rem,4vw,3.25rem)_clamp(1.5rem,4vw,2.5rem)] text-fg shadow-[0_-12px_40px_rgba(3,11,24,0.08)] will-change-transform min-[860px]:grid-cols-[1.2fr_0.8fr] min-[860px]:gap-8"
                   style={
                     {
                       "--stack-i": i,

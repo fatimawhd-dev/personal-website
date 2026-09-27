@@ -114,6 +114,8 @@ export function Hero() {
       });
     };
 
+    const isCompact = () => window.matchMedia("(max-width: 899px)").matches;
+
     const killMorph = () => {
       morphTrigger?.kill();
       morphTrigger = null;
@@ -157,8 +159,16 @@ export function Hero() {
         animation: morphTl,
         trigger: section,
         start: "top top",
-        // Lenis already eases scroll — scrub:true tracks 1:1 (no double lag)
-        end: () => `+=${Math.round(window.innerHeight * 0.85)}`,
+        // Lenis already eases scroll — scrub:true tracks 1:1 (no double lag).
+        // On a phone the copy sits under the name, so the shrink finishes
+        // before that text can catch it. The motion itself stays the same.
+        end: () => {
+          const travel = geo ? Math.abs(geo.y) : window.innerHeight * 0.5;
+          if (isCompact()) {
+            return `+=${Math.round(Math.max(160, Math.min(travel * 0.55, window.innerHeight * 0.36)))}`;
+          }
+          return `+=${Math.round(window.innerHeight * 0.85)}`;
+        },
         scrub: true,
         invalidateOnRefresh: true,
       });

@@ -80,6 +80,7 @@ export function Process() {
       // Leave a little breathing room on the right after the last card
       return Math.max(0, scroller.scrollWidth - window.innerWidth + 48);
     };
+    const compactQuery = window.matchMedia("(max-width: 859px)");
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -90,9 +91,17 @@ export function Process() {
           ease: "none",
           force3D: true,
           scrollTrigger: {
-            trigger: section,
-            start: "top 5%",
-            end: () => `+=${Math.max(window.innerHeight * 2.6, getShift() * 1.05)}`,
+            trigger: pin,
+            // Phone: start when the block is centered, and hold it there.
+            // Pinning the section (it grows with the scroll) would drift downward.
+            start: () => (compactQuery.matches ? "center center" : "top 5%"),
+            end: () => {
+              const shift = getShift();
+              const distance = compactQuery.matches
+                ? Math.max(window.innerHeight * 1.35, shift * 0.9)
+                : Math.max(window.innerHeight * 2.6, shift * 1.05);
+              return `+=${distance}`;
+            },
             scrub: 0.7,
             pin: pin,
             anticipatePin: 1,
@@ -102,8 +111,13 @@ export function Process() {
       );
     }, section);
 
-    ScrollTrigger.refresh();
-    return () => ctx.revert();
+    const refresh = () => ScrollTrigger.refresh();
+    refresh();
+    window.addEventListener("portfolio:scroll-ready", refresh);
+    return () => {
+      window.removeEventListener("portfolio:scroll-ready", refresh);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -113,10 +127,10 @@ export function Process() {
       aria-label="How I forge an idea into a product"
       className="relative z-1 bg-[#f4f7fb] text-ink"
     >
-      <div ref={pinRef} className="relative flex h-svh items-center overflow-hidden">
+      <div ref={pinRef} className="relative flex items-center overflow-hidden py-14 min-[860px]:h-svh min-[860px]:py-0">
         <div
           ref={scrollerRef}
-          className="flex w-max items-center gap-[clamp(3.5rem,7vw,5.5rem)] py-10 pl-[clamp(1.25rem,4vw,3.5rem)] pr-[min(12vw,5rem)] will-change-transform"
+          className="flex w-max items-center gap-[clamp(3.5rem,7vw,5.5rem)] py-0 pl-[clamp(1.25rem,4vw,3.5rem)] pr-[min(12vw,5rem)] will-change-transform min-[860px]:py-10"
         >
           {/* Title fills leftover viewport so only the 1st card shows initially */}
           <div
@@ -149,7 +163,7 @@ export function Process() {
               >
                 <article
                   data-process-card
-                  className={`flex h-[min(62svh,520px)] w-full flex-col justify-between overflow-hidden rounded-4xl p-[clamp(1.25rem,3vw,1.75rem)] shadow-[0_24px_60px_rgba(6,20,40,0.14)] ${tilt} ${cardTone[step.tone]}`}
+                  className={`flex h-[26rem] w-full flex-col justify-between overflow-hidden rounded-4xl p-[clamp(1.25rem,3vw,1.75rem)] shadow-[0_24px_60px_rgba(6,20,40,0.14)] min-[860px]:h-[min(62svh,520px)] ${tilt} ${cardTone[step.tone]}`}
                 >
                   <p
                     className={`m-0 text-[0.72rem] font-semibold tracking-[0.18em] uppercase ${accentOn[step.tone]}`}
