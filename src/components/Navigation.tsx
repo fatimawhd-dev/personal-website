@@ -27,8 +27,12 @@ export function Navigation() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.documentElement.toggleAttribute("data-nav-open", open);
+    const floater = document.querySelector<HTMLElement>("[data-hero-floater]");
+    if (floater) gsap.set(floater, { autoAlpha: open ? 0 : 1 });
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.removeAttribute("data-nav-open");
     };
   }, [open]);
 

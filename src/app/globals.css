@@ -30,6 +30,11 @@
 
 /* Keep resets in @layer base so Tailwind utilities can override them
    (unlayered `a { color: inherit }` was wiping link text colors). */
+html[data-nav-open] [data-hero-floater] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 @layer base {
   * {
     box-sizing: border-box;

@@ -54,6 +54,7 @@ export function Hero() {
       floater.className = `${display} pointer-events-none m-0 whitespace-nowrap text-[clamp(4.2rem,16vw,10rem)] leading-[0.92] text-[var(--white)] uppercase will-change-transform [backface-visibility:hidden]`;
       floater.textContent = site.shortName;
       floater.setAttribute("aria-hidden", "true");
+      floater.setAttribute("data-hero-floater", "");
       gsap.set(floater, {
         position: "fixed",
         left: 0,
@@ -110,7 +111,7 @@ export function Hero() {
         transformOrigin: "0 0",
         zIndex: 90,
         force3D: true,
-        autoAlpha: visible ? 1 : 0,
+        autoAlpha: document.documentElement.hasAttribute("data-nav-open") ? 0 : visible ? 1 : 0,
       });
     };
 
