@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { processSteps } from "@/data/content";
@@ -8,57 +9,29 @@ import { display, sectionHeading, sectionLabel, sectionLead } from "@/lib/ui";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const cardTone: Record<(typeof processSteps)[number]["tone"], string> = {
-  coral: "bg-[#ff4f2d] text-white",
-  sand: "bg-[#d8e4f0] text-ink",
-  teal: "bg-[#1a6b6b] text-white",
-  ink: "bg-[#061428] text-white",
+const cardFace: Record<(typeof processSteps)[number]["tone"], string> = {
+  coral: "bg-[#f6d5c4]",
+  sand: "bg-[#d5e4f6]",
+  teal: "bg-[#d4ebe3]",
+  ink: "bg-[#e4dff6]",
 };
 
-const accentOn: Record<(typeof processSteps)[number]["tone"], string> = {
-  coral: "text-white/90",
-  sand: "text-ink/70",
-  teal: "text-white/85",
-  ink: "text-[#e8e4d4]/80",
+const stepArt: Record<(typeof processSteps)[number]["tone"], string> = {
+  coral: "/process/frame.png",
+  sand: "/process/outline.png",
+  teal: "/process/realise.png",
+  ink: "/process/grow.png",
 };
 
 function StepArt({ tone }: { tone: (typeof processSteps)[number]["tone"] }) {
-  const stroke = "currentColor";
-  if (tone === "coral") {
-    return (
-      <svg viewBox="0 0 200 200" className="size-[min(48%,9.5rem)] opacity-90" aria-hidden>
-        <circle cx="100" cy="100" r="54" fill="none" stroke={stroke} strokeWidth="3" />
-        <circle cx="100" cy="100" r="8" fill={stroke} />
-        <path d="M100 46v18M100 136v18M46 100h18M136 100h18" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-        <path d="M64 64l12 12M124 124l12 12M124 64l-12 12M64 124l12-12" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (tone === "sand") {
-    return (
-      <svg viewBox="0 0 200 200" className="size-[min(48%,9.5rem)] opacity-90" aria-hidden>
-        <rect x="42" y="48" width="116" height="84" rx="14" fill="none" stroke={stroke} strokeWidth="3" />
-        <path d="M62 78h76M62 98h52M62 118h64" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-        <path d="M70 148h60M100 132v28" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (tone === "teal") {
-    return (
-      <svg viewBox="0 0 200 200" className="size-[min(48%,9.5rem)] opacity-90" aria-hidden>
-        <rect x="48" y="40" width="104" height="120" rx="14" fill="none" stroke={stroke} strokeWidth="3" />
-        <path d="M70 72h60M70 96h44M70 120h52" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-        <path d="M78 152h44" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-      </svg>
-    );
-  }
   return (
-    <svg viewBox="0 0 200 200" className="size-[min(48%,9.5rem)] opacity-90" aria-hidden>
-      <path d="M56 120c0-28 20-48 44-48s44 20 44 48" fill="none" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-      <path d="M72 120h56M100 72v20" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-      <circle cx="100" cy="148" r="10" fill="none" stroke={stroke} strokeWidth="3" />
-      <path d="M100 158v16" stroke={stroke} strokeWidth="3" strokeLinecap="round" />
-    </svg>
+    <Image
+      src={stepArt[tone]}
+      alt=""
+      fill
+      sizes="(max-width: 859px) 40vw, 380px"
+      className="object-contain object-center"
+    />
   );
 }
 
@@ -92,18 +65,16 @@ export function Process() {
           force3D: true,
           scrollTrigger: {
             trigger: pin,
-            // Phone: start when the block is centered, and hold it there.
-            // Pinning the section (it grows with the scroll) would drift downward.
-            start: () => (compactQuery.matches ? "center center" : "top 5%"),
+            // Phone: slide the cards sideways as the row scrolls through.
+            // Pinning it in the center holds a short row on screen and leaves a tall gap.
+            start: () => (compactQuery.matches ? "top 64%" : "top 5%"),
             end: () => {
+              if (compactQuery.matches) return "bottom 40%";
               const shift = getShift();
-              const distance = compactQuery.matches
-                ? Math.max(window.innerHeight * 1.35, shift * 0.9)
-                : Math.max(window.innerHeight * 2.6, shift * 1.05);
-              return `+=${distance}`;
+              return `+=${Math.max(window.innerHeight * 2.6, shift * 1.05)}`;
             },
             scrub: 0.7,
-            pin: pin,
+            pin: compactQuery.matches ? false : pin,
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },
@@ -127,28 +98,28 @@ export function Process() {
       aria-label="How I forge an idea into a product"
       className="relative z-1 bg-[#f4f7fb] text-ink"
     >
-      <div ref={pinRef} className="relative flex items-center overflow-hidden py-14 min-[860px]:h-svh min-[860px]:py-0">
+      <div ref={pinRef} className="relative flex items-center overflow-hidden py-6 min-[860px]:h-svh min-[860px]:py-0">
         <div
           ref={scrollerRef}
           className="flex w-max items-center gap-[clamp(3.5rem,7vw,5.5rem)] py-0 pl-[clamp(1.25rem,4vw,3.5rem)] pr-[min(12vw,5rem)] will-change-transform min-[860px]:py-10"
         >
           {/* Title fills leftover viewport so only the 1st card shows initially */}
           <div
-            className="flex shrink-0 flex-col justify-center pr-2"
+            className="flex shrink-0 flex-col justify-center pr-2 max-[859px]:self-start max-[859px]:pt-1"
             style={{
               width:
-                "max(17rem, calc(100vw - min(92vw, 650px) - clamp(3.5rem, 7vw, 5.5rem) - clamp(1.25rem, 4vw, 3.5rem) - 1.5rem))",
+                "max(17rem, calc(100vw - min(92vw, 780px) - clamp(3.5rem, 7vw, 5.5rem) - clamp(1.25rem, 4vw, 3.5rem) - 1.5rem))",
             }}
           >
             <p className={sectionLabel}>
               Process
             </p>
             <h2
-              className={`${sectionHeading} mt-4 max-w-[12ch] text-ink`}
+              className={`${sectionHeading} mt-2 max-w-[12ch] text-ink min-[860px]:mt-4`}
             >
               How I forge an idea into a product.
             </h2>
-            <p className={`${sectionLead} mt-5 max-w-[36ch] text-(--ink-muted)`}>
+            <p className={`${sectionLead} mt-3 max-w-[36ch] text-(--ink-muted) min-[860px]:mt-5`}>
               A four-part approach I use to move from a rough idea to a considered, working product —
               with clarity at every stage.
             </p>
@@ -159,33 +130,27 @@ export function Process() {
             return (
               <div
                 key={step.title}
-                className="flex w-[min(92vw,650px)] shrink-0 items-center justify-center px-3"
+                className="flex w-[62vw] shrink-0 items-center justify-center px-1.5 min-[860px]:w-[min(92vw,780px)] min-[860px]:px-3"
               >
                 <article
                   data-process-card
-                  className={`flex h-[26rem] w-full flex-col justify-between overflow-hidden rounded-4xl p-[clamp(1.25rem,3vw,1.75rem)] shadow-[0_24px_60px_rgba(6,20,40,0.14)] min-[860px]:h-[min(62svh,520px)] ${tilt} ${cardTone[step.tone]}`}
+                  className={`relative flex h-60 w-full overflow-hidden rounded-[1.35rem] text-[#1c2430] shadow-[0_18px_44px_rgba(20,32,48,0.08)] min-[860px]:h-[min(62svh,520px)] min-[860px]:rounded-[1.75rem] ${tilt} ${cardFace[step.tone]}`}
                 >
-                  <p
-                    className={`m-0 text-[0.72rem] font-semibold tracking-[0.18em] uppercase ${accentOn[step.tone]}`}
-                  >
-                    {step.label}
-                  </p>
-
-                  <div className="flex flex-1 items-center justify-center py-3">
-                    <StepArt tone={step.tone} />
-                  </div>
-
-                  <div>
-                    <h3
-                      className={`${display} m-0 text-[clamp(1.7rem,3.5vw,2.4rem)] uppercase leading-[0.95]`}
-                    >
-                      {step.title}
-                    </h3>
-                    <p
-                      className={`mt-2 m-0 max-w-[26ch] text-[0.88rem] leading-[1.45] ${accentOn[step.tone]}`}
-                    >
-                      {step.body}
+                  <div className="relative z-1 flex w-[52%] flex-col justify-between p-3.5 min-[860px]:w-[48%] min-[860px]:p-[clamp(1.75rem,3.2vw,2.5rem)]">
+                    <p className="m-0 text-[0.55rem] font-semibold tracking-[0.14em] text-[#1c2430]/65 uppercase min-[860px]:text-[0.68rem] min-[860px]:tracking-[0.16em]">
+                      {step.label}
                     </p>
+                    <div className="mb-1 min-[860px]:mb-6">
+                      <h3 className={`${display} m-0 text-[1.15rem] uppercase leading-[0.95] min-[860px]:text-[clamp(2.05rem,3.8vw,2.9rem)]`}>
+                        {step.title}
+                      </h3>
+                      <p className="mt-1.5 m-0 max-w-[22ch] text-[0.68rem] leading-[1.35] text-[#1c2430]/75 min-[860px]:mt-3.5 min-[860px]:max-w-[26ch] min-[860px]:text-[1.05rem] min-[860px]:leading-[1.45]">
+                        {step.body}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pointer-events-none absolute inset-y-3 right-2 w-[54%] min-[860px]:inset-y-6 min-[860px]:right-6">
+                    <StepArt tone={step.tone} />
                   </div>
                 </article>
               </div>

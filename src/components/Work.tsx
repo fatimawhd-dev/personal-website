@@ -163,26 +163,26 @@ export function Work() {
                       </span>
 
                       {/* Back — project details */}
-                      <span className="absolute inset-0 flex transform-[rotateY(180deg)] flex-col overflow-hidden rounded-[1.25rem] border border-[#e8e4d4]/12 bg-[#0a1a30] p-[clamp(1.1rem,3vw,1.75rem)] text-[#e8e4d4] backface-hidden">
-                        <span className="flex min-h-0 flex-1 flex-col gap-3">
+                      <span className="absolute inset-0 flex transform-[rotateY(180deg)] flex-col overflow-hidden rounded-[1.25rem] border border-[#e8e4d4]/12 bg-[#0a1a30] p-3 text-[#e8e4d4] backface-hidden min-[900px]:p-[clamp(1.1rem,3vw,1.75rem)]">
+                        <span className="flex min-h-0 flex-1 flex-col gap-1.5 min-[900px]:gap-3">
                           <span className="flex shrink-0 items-start justify-between gap-3">
                             <span>
-                              <span className="block text-[0.68rem] tracking-[0.18em] uppercase text-[#e8e4d4]/45">
+                              <span className="block text-[0.58rem] tracking-[0.16em] uppercase text-[#e8e4d4]/45 min-[900px]:text-[0.68rem] min-[900px]:tracking-[0.18em]">
                                 What I did
                               </span>
                               <span
-                                className={`${display} mt-1 block text-[clamp(1.05rem,2.2vw,1.4rem)] uppercase tracking-[-0.03em]`}
+                                className={`${display} mt-0.5 block text-[0.78rem] uppercase tracking-[-0.03em] min-[900px]:mt-1 min-[900px]:text-[clamp(1.05rem,2.2vw,1.4rem)]`}
                               >
                                 {project.role}
                               </span>
                             </span>
                           </span>
 
-                          <ul className="m-0 flex min-h-0 list-none flex-1 flex-col gap-2 overflow-y-auto overscroll-contain p-0 pr-1">
+                          <ul className="m-0 flex min-h-0 list-none flex-1 flex-col gap-1 overflow-y-auto overscroll-contain p-0 pr-1 min-[900px]:gap-2">
                             {project.did.map((item) => (
                               <li
                                 key={item}
-                                className="relative pl-3 text-[0.82rem] leading-[1.45] text-[#e8e4d4]/82 before:absolute before:top-[0.55em] before:left-0 before:size-1 before:rounded-full before:bg-[#ff4f2d]"
+                                className="relative pl-2.5 text-[0.62rem] leading-[1.3] text-[#e8e4d4]/82 before:absolute before:top-[0.45em] before:left-0 before:size-1 before:rounded-full before:bg-[#ff4f2d] min-[900px]:pl-3 min-[900px]:text-[0.82rem] min-[900px]:leading-[1.45] min-[900px]:before:top-[0.55em]"
                               >
                                 {item}
                               </li>
@@ -190,15 +190,15 @@ export function Work() {
                           </ul>
                         </span>
 
-                        <span className="mt-3 shrink-0 border-t border-[#e8e4d4]/12 pt-3">
-                          <span className="block text-[0.65rem] tracking-[0.18em] uppercase text-[#e8e4d4]/45">
+                        <span className="mt-2 shrink-0 border-t border-[#e8e4d4]/12 pt-2 min-[900px]:mt-3 min-[900px]:pt-3">
+                          <span className="block text-[0.55rem] tracking-[0.16em] uppercase text-[#e8e4d4]/45 min-[900px]:text-[0.65rem] min-[900px]:tracking-[0.18em]">
                             What I used
                           </span>
-                          <span className="mt-2 flex flex-wrap gap-1.5">
+                          <span className="mt-1.5 flex flex-wrap gap-1 min-[900px]:mt-2 min-[900px]:gap-1.5">
                             {project.tech.map((item) => (
                               <span
                                 key={item}
-                                className="rounded-full border border-[#e8e4d4]/25 px-2.5 py-1 text-[0.68rem] tracking-[0.04em] text-[#e8e4d4]/85"
+                                className="rounded-full border border-[#e8e4d4]/25 px-1.5 py-0.5 text-[0.55rem] tracking-[0.03em] text-[#e8e4d4]/85 min-[900px]:px-2.5 min-[900px]:py-1 min-[900px]:text-[0.68rem] min-[900px]:tracking-[0.04em]"
                               >
                                 {item}
                               </span>
@@ -217,13 +217,7 @@ export function Work() {
                     <h3
                       className={`${display} m-0 text-[clamp(2rem,5vw,3.4rem)] uppercase tracking-[-0.03em] text-[#e8e4d4]`}
                     >
-                      {project.href ? (
-                        <a href={project.href} target="_blank" rel="noreferrer">
-                          {project.title}
-                        </a>
-                      ) : (
-                        project.title
-                      )}
+                      {project.title}
                     </h3>
                     <span className="rounded-full bg-[#e8e4d4] px-3 py-1 text-[0.72rem] font-semibold tracking-[0.04em] text-[#0a0c10]">
                       {project.year}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services } from "@/data/content";
@@ -15,72 +16,22 @@ const tonePos: Record<(typeof services)[number]["tone"], string> = {
   ink: "100% 70%",
 };
 
+const serviceArt: Record<(typeof services)[number]["tone"], string> = {
+  coral: "/services/frontend.png",
+  sand: "/services/backend.png",
+  teal: "/services/full-stack.png",
+  ink: "/services/websites-and-mobile.png",
+};
+
 function Doodle({ tone }: { tone: (typeof services)[number]["tone"] }) {
-  const cls = "h-[78%] w-[78%]";
-  if (tone === "coral") {
-    return (
-      <svg viewBox="0 0 240 240" className={cls} aria-hidden>
-        <rect x="28" y="48" width="120" height="88" rx="8" fill="none" stroke="currentColor" strokeWidth="3" />
-        <rect x="40" y="62" width="96" height="52" rx="4" fill="none" stroke="currentColor" strokeWidth="2.5" />
-        <path d="M70 160h36M88 148v12" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="176" cy="64" r="18" fill="none" stroke="currentColor" strokeWidth="3" />
-        <path d="M168 64h16M176 56v16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M150 120c18-6 34 4 42 18" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        <text x="48" y="200" fontSize="18" fontWeight="700" letterSpacing="2" fill="currentColor">
-          W.W.W.
-        </text>
-        <path d="M170 168l22-22M192 168l-22-22" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
-  if (tone === "sand") {
-    return (
-      <svg viewBox="0 0 240 240" className={cls} aria-hidden>
-        <rect x="36" y="40" width="100" height="70" rx="8" fill="none" stroke="currentColor" strokeWidth="3" />
-        <path d="M52 62h68M52 78h48M52 94h56" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <rect x="120" y="100" width="84" height="92" rx="10" fill="none" stroke="currentColor" strokeWidth="3" />
-        <circle cx="162" cy="132" r="14" fill="none" stroke="currentColor" strokeWidth="2.5" />
-        <path d="M140 168h44M140 182h32" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M48 150v40M48 150h28v16H48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
-        <path d="M64 206c12-18 28-18 40 0" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
-  if (tone === "teal") {
-    return (
-      <svg viewBox="0 0 240 240" className={cls} aria-hidden>
-        <rect x="40" y="44" width="150" height="36" rx="18" fill="none" stroke="currentColor" strokeWidth="3" />
-        <circle cx="64" cy="62" r="8" fill="currentColor" />
-        <text x="84" y="68" fontSize="14" fill="currentColor">
-          Search
-        </text>
-        <rect x="40" y="100" width="64" height="48" rx="10" fill="none" stroke="currentColor" strokeWidth="3" />
-        <path d="M58 124l12 8 20-18" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="120" y="100" width="80" height="48" rx="10" fill="none" stroke="currentColor" strokeWidth="3" />
-        <circle cx="148" cy="124" r="12" fill="none" stroke="currentColor" strokeWidth="2.5" />
-        <path d="M144 124l6 4 8-10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <rect x="56" y="168" width="120" height="36" rx="8" fill="none" stroke="currentColor" strokeWidth="3" />
-        <text x="78" y="192" fontSize="15" fontWeight="700" fill="currentColor">
-          Error
-        </text>
-      </svg>
-    );
-  }
-
   return (
-    <svg viewBox="0 0 240 240" className={cls} aria-hidden>
-      <rect x="62" y="28" width="116" height="184" rx="18" fill="none" stroke="currentColor" strokeWidth="3" />
-      <rect x="74" y="48" width="92" height="140" rx="8" fill="none" stroke="currentColor" strokeWidth="2.5" />
-      <text x="86" y="78" fontSize="13" fontWeight="700" fill="currentColor">
-        Login App
-      </text>
-      <rect x="86" y="92" width="68" height="18" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-      <rect x="86" y="120" width="68" height="18" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-      <rect x="86" y="152" width="68" height="22" rx="6" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2" />
-      <circle cx="120" cy="198" r="5" fill="currentColor" />
-    </svg>
+    <Image
+      src={serviceArt[tone]}
+      alt=""
+      fill
+      sizes="300px"
+      className="object-contain p-2"
+    />
   );
 }
 
@@ -267,7 +218,7 @@ export function Services() {
                       ))}
                     </ul>
                   </div>
-                  <div className="hidden aspect-square w-[min(100%,280px)] place-items-center justify-self-end self-start rounded-[1.35rem] bg-white text-[#111] shadow-[inset_0_0_0_1px_rgba(10,22,40,0.06)] min-[860px]:grid min-[860px]:w-[min(100%,300px)]">
+                  <div className="relative hidden aspect-square w-[min(100%,280px)] justify-self-end self-start overflow-hidden rounded-[1.35rem] bg-white shadow-[inset_0_0_0_1px_rgba(10,22,40,0.06)] min-[860px]:block min-[860px]:w-[min(100%,300px)]">
                     <Doodle tone={service.tone} />
                   </div>
                 </article>

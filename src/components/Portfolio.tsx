@@ -7,7 +7,6 @@ import { Navigation } from "./Navigation";
 import { Hero } from "./Hero";
 import { About } from "./About";
 import { Services } from "./Services";
-// import { Experience } from "./Experience";
 import { JourneyTimeline } from "./JourneyTimeline";
 import { Toolkit } from "./Toolkit";
 import { Process } from "./Process";
@@ -30,7 +29,6 @@ export function Portfolio() {
             <Hero />
             <About />
             <Services />
-            {/* <Experience /> */}
             <JourneyTimeline />
             <Toolkit />
             <Process />

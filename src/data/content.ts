@@ -29,111 +29,21 @@ export const experience = [
     role: "Freelance Product Engineer",
     company: "Independent",
     period: "July 2026 — Present",
-    category: "Freelance · Product",
-    place: "Remote · clients",
-    summary:
-      "Designing and shipping full-stack products for clients end to end — including continuing Storia with the client after We Over I, plus new products from Figma through production.",
-    systems: [
-      {
-        title: "Storia",
-        description:
-          "Continued as lead engineer with the client after We Over I — AI journaling, notifications, and App of the Day craft.",
-      },
-      {
-        title: "Creator Assist",
-        description:
-          "Kanban content tracker, payments, agency talent management, and idea-to-content flows for creators.",
-      },
-      {
-        title: "Progress Pad",
-        description:
-          "Triggers, mind sweeps, writing spaces, six pillars of progression, and a full archive of past days.",
-      },
-    ],
-    highlights: [
-      "Kept shipping Storia with the client after leaving We Over I — Ask Sunny, Echo, guided journals, and AI reviews.",
-      "Designed Creator Assist and Progress Pad in Figma, then engineered them in Next.js, TypeScript, and Supabase.",
-      "Built creator workflows for organic and paid collaborations, profit-and-loss tracking, and agency multi-talent views.",
-      "Shipped Progress Today features including triggers, gratitude/reflection writing, and mental-to-romantic progress pillars.",
-    ],
   },
   {
     role: "Product Engineer",
     company: "We Over I",
     period: "June 2024 — July 2026",
-    category: "Product & AI",
-    place: "Remote · startups",
-    summary:
-      "Partnering with early-stage startups to deliver end-to-end software design, engineering, and product solutions — from Figma through production.",
-    systems: [
-      {
-        title: "Storia",
-        description:
-          "Led engineering on an AI journaling app featured as App of the Day by Apple multiple times.",
-      },
-      {
-        title: "Kurdistan Tourism",
-        description:
-          "AI trip planner, place bookings, and immersive video experiences for travelers.",
-      },
-    ],
-    highlights: [
-      "Built personalized notifications, weekly/monthly AI reviews, Ask Sunny, Echo, and guided journals on Storia.",
-      "Shipped AI itineraries from party size, kids, and trip length — plus events and tours booking.",
-      "Owned mobile/web product craft across subscriptions, maps, and AI-assisted travel flows.",
-    ],
   },
   {
     role: "Software Engineer",
     company: "VaporVM",
     period: "Dec 2023 — June 2024",
-    category: "Platform & Systems",
-    place: "Enterprise · cloud",
-    summary:
-      "Cloud transformation and custom software for enterprise clients — real-time platforms, scheduled jobs, and production data systems.",
-    systems: [
-      {
-        title: "Support Cloud",
-        description:
-          "Cloud support platform with SignalR real-time updates for live operations.",
-      },
-      {
-        title: "Jobs & data layer",
-        description:
-          "Quartz.NET jobs, CQRS backends, and MongoDB models tuned for production.",
-      },
-    ],
-    highlights: [
-      "Built scheduled Quartz.NET jobs and CQRS services with optimized SQL procedures.",
-      "Delivered real-time support experiences with SignalR on Support Cloud.",
-      "Designed MongoDB models and indexes for reliable production data.",
-    ],
   },
   {
     role: "Associate Software Engineer",
     company: "ili.digital",
     period: "Sept 2022 — Nov 2023",
-    category: "Engineering Foundation",
-    place: "Enterprise · product",
-    summary:
-      "Custom software and platform work for enterprise clients — including flight-planning systems, access control, and controlled feature rollouts.",
-    systems: [
-      {
-        title: "VoloIQ",
-        description:
-          "Flight-planning for certified eVTOL — distances, payload, and mid-route fuel modeling.",
-      },
-      {
-        title: "Access & rollouts",
-        description:
-          "Django RBAC and Flagsmith feature flags for safe, controlled production releases.",
-      },
-    ],
-    highlights: [
-      "Contributed across front end and back end on Volocopter’s VoloIQ, with deep work on the Django side.",
-      "Modeled route distance, weight/luggage, and remaining fuel along the path.",
-      "Shipped React interfaces with RBAC and Flagsmith-driven feature rollouts.",
-    ],
   },
 ];
 
@@ -227,7 +137,6 @@ export const projects = [
     tech: ["C#", ".NET", "SignalR", "MongoDB", "Quartz.NET"],
     year: "2023",
     status: "Production",
-    href: "https://managex.ae/",
     image: "/projects/managex.png",
     imageAlt:
       "ManageX Platform hero — Empowers you to hire certified resources, with Get Started and Call Now",
@@ -267,7 +176,6 @@ export const services = [
   {
     title: "Frontend Development",
     tone: "coral" as const,
-    ink: "light" as const,
     description:
       "I build polished, high-performance interfaces with React and Next.js — responsive layouts, thoughtful interactions, and code that stays maintainable as products grow.",
     features: ["Responsive Interfaces", "Motion & Interactions", "Performance"],
@@ -275,7 +183,6 @@ export const services = [
   {
     title: "Backend Development",
     tone: "sand" as const,
-    ink: "light" as const,
     description:
       "I design APIs and services that stay reliable under load — clean data models, secure auth, and integrations that make the product feel seamless end to end.",
     features: ["APIs & Services", "Data Architecture", "Reliability"],
@@ -283,7 +190,6 @@ export const services = [
   {
     title: "UI/UX Development",
     tone: "teal" as const,
-    ink: "light" as const,
     description:
       "I turn product goals into clear flows and interfaces — from wireframes to production-ready UI — so every screen feels intentional, accessible, and easy to ship.",
     features: ["Product Flows", "Design Systems", "Accessible UI"],
@@ -291,7 +197,6 @@ export const services = [
   {
     title: "Websites and Mobile Apps",
     tone: "ink" as const,
-    ink: "light" as const,
     description:
       "I create custom-coded websites and apps specifically for your brand. I focus on making sure they are scalable, fast, accessible, and have engaging animations to provide a memorable experience for users.",
     features: ["Modern Websites", "Motion & Animations", "Scalability"],
@@ -457,16 +362,16 @@ export const impact = {
 export const testimonials = [
   {
     quote:
-      "Working with Fatima on Storia was a true pleasure. Her product sense, polish, and commitment to quality turned ambitious ideas into an experience people love — and that earned App of the Day.",
+      "Fatima has been brilliant to work with. She’s thoughtful, reliable and incredibly solutions-focused, and has a real ability to take an idea or problem and work out how to make it happen technically. She communicates clearly, works with real care, and I’ve always felt I could trust her to find a way forward.",
     name: "Elizabeth Uviebinené",
     role: "Storia",
     tags: ["Mobile", "AI", "Product"],
   },
-  {
-    quote:
-      "Fatima brought clarity and craft to Progress Pad. She ships fast without cutting corners — thoughtful engineering, clean interfaces, and a collaborator you can trust end to end.",
-    name: "Kheron Gilpin",
-    role: "Progress Pad",
-    tags: ["Full Stack", "UI/UX", "Website", "Delivery"],
-  },
+  // {
+  //   quote:
+  //     "Fatima brought clarity and craft to Progress Pad. She ships fast without cutting corners — thoughtful engineering, clean interfaces, and a collaborator you can trust end to end.",
+  //   name: "Kheron Gilpin",
+  //   role: "Progress Pad",
+  //   tags: ["Full Stack", "UI/UX", "Website", "Delivery"],
+  // },
 ];

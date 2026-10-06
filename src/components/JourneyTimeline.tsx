@@ -11,31 +11,35 @@ gsap.registerPlugin(ScrollTrigger);
 /** Layout + short blurbs — role/company/dates from `experience` (oldest → newest). */
 const chapterLayout = [
   {
-    t: 0.14,
+    t: 0.1,
     side: "above" as const,
-    nudgeX: "-42px",
+    nudgeX: "0px",
     nudgeXMobile: "-4px",
+    gap: "4rem",
     blurb: "VoloIQ flight planning, Django RBAC, and Flagsmith rollouts for enterprise clients.",
   },
   {
-    t: 0.34,
+    t: 0.38,
     side: "above" as const,
-    nudgeX: "78px",
+    nudgeX: "0px",
     nudgeXMobile: "-18px",
+    gap: "4rem",
     blurb: "Support Cloud with SignalR, Quartz.NET jobs, CQRS backends, and MongoDB systems.",
   },
   {
-    t: 0.58,
+    t: 0.56,
     side: "below" as const,
-    nudgeX: "16px",
+    nudgeX: "0px",
     nudgeXMobile: "54px",
+    gap: "4rem",
     blurb: "Led Storia (App of the Day) and Kurdistan’s AI trip planner & bookings.",
   },
   {
-    t: 0.82,
+    t: 0.86,
     side: "below" as const,
-    nudgeX: "-40px",
+    nudgeX: "0px",
     nudgeXMobile: "42px",
+    gap: "4.75rem",
     blurb: "Continuing Storia with the client, plus Creator Assist and Progress Pad.",
   },
 ];
@@ -57,10 +61,10 @@ const VB_MOBILE = { x: 168, y: 98, w: 680, h: 390 };
 
 // Smooth letter-S — G1-continuous join (no kink at the waist)
 const PATH_D =
-  "M 200 130 C 980 130, 980 255, 420 275 C 168 284, 100 420, 520 455";
+  "M 200 130 C 980 130, 980 255, 420 275 C 168 284, 100 420, 430 455";
 
-const LABEL_W = "w-[7.75rem] min-[860px]:w-[min(44vw,220px)]";
-const STEM = "h-6 min-[860px]:h-12";
+const LABEL_W = "w-[7.75rem] min-[860px]:w-[min(44vw,240px)]";
+const STEM = "h-6 min-[860px]:h-[calc(var(--tl-gap)-0.7rem)]";
 
 function setDash(el: SVGPathElement | null, length: number, offset: number) {
   if (!el) return;
@@ -91,12 +95,26 @@ export function JourneyTimeline() {
       const len = path.getTotalLength();
       if (len < 1) return;
       const compact = window.matchMedia("(max-width: 859px)").matches;
-      const vb = compact ? VB_MOBILE : VB_DESKTOP;
+      let vb = compact ? VB_MOBILE : VB_DESKTOP;
+      if (!compact) {
+        const bb = path.getBBox();
+        vb = {
+          x: bb.x + bb.width / 2 - VB_W / 2,
+          y: VB_DESKTOP.y,
+          w: VB_W,
+          h: VB_H,
+        };
+      }
       path.ownerSVGElement?.setAttribute(
         "viewBox",
         `${vb.x} ${vb.y} ${vb.w} ${vb.h}`,
       );
-      chart.style.aspectRatio = compact ? `${vb.w} / ${vb.h}` : "";
+      // Desktop fills a wider, fixed-height box. Mobile keeps the true proportions.
+      path.ownerSVGElement?.setAttribute(
+        "preserveAspectRatio",
+        compact ? "xMidYMid meet" : "none",
+      );
+      chart.style.aspectRatio = compact ? `${vb.w} / ${vb.h}` : "auto";
       markers.forEach((el, i) => {
         const m = milestones[i];
         if (!m) return;
@@ -180,7 +198,7 @@ export function JourneyTimeline() {
     <section
       id="experience"
       ref={sectionRef}
-      className="relative z-1 overflow-hidden bg-transparent py-[clamp(2.5rem,5.5vw,4rem)]"
+      className="relative z-1 overflow-hidden bg-transparent py-[clamp(2.5rem,5.5vw,4rem)] min-[860px]:min-h-[calc(100svh-5.2rem)]"
       aria-label="Approach"
     >
       <div className="mx-auto max-w-350 px-[clamp(1.25rem,4vw,3.5rem)]">
@@ -191,10 +209,10 @@ export function JourneyTimeline() {
           A path drawn in chapters.
         </h2>
 
-        <div className="relative max-[859px]:pt-28 max-[859px]:pb-36">
+        <div className="relative max-[859px]:pt-28 max-[859px]:pb-16 min-[860px]:pt-8">
           <div
             ref={chartRef}
-            className="relative mx-auto aspect-1100/560 w-full max-w-7xl max-[859px]:-mx-[clamp(1.25rem,4vw,3.5rem)] max-[859px]:w-[calc(100%+2*clamp(1.25rem,4vw,3.5rem))] max-[859px]:max-w-none"
+            className="relative mx-auto aspect-1100/560 w-full max-w-7xl max-[859px]:-mx-[clamp(1.25rem,4vw,3.5rem)] max-[859px]:w-[calc(100%+2*clamp(1.25rem,4vw,3.5rem))] max-[859px]:max-w-none min-[860px]:h-[min(40rem,calc(100svh-18rem))] min-[860px]:w-full min-[860px]:max-w-none"
           >
             <svg
               viewBox={`0 0 ${VB_W} ${VB_H}`}
@@ -238,26 +256,28 @@ export function JourneyTimeline() {
                       ? "bottom-full mb-1.5 origin-bottom"
                       : "top-full mt-1.5 origin-top"
                       }`}
+                    style={{ "--tl-gap": m.gap } as CSSProperties}
                   />
 
                   <div
-                    className={`absolute left-1/2 ${LABEL_W} text-center transform-[translateX(calc(-50%+var(--tl-nudge-sm)))] min-[860px]:transform-[translateX(calc(-50%+var(--tl-nudge)))] ${above ? "bottom-full mb-8 min-[860px]:mb-16" : "top-full mt-8 min-[860px]:mt-16"
+                    className={`absolute left-1/2 ${LABEL_W} text-center transform-[translateX(calc(-50%+var(--tl-nudge-sm)))] min-[860px]:transform-[translateX(calc(-50%+var(--tl-nudge)))] ${above ? "bottom-full mb-8 min-[860px]:mb-(--tl-gap)" : "top-full mt-8 min-[860px]:mt-(--tl-gap)"
                       }`}
                     style={
                       {
                         "--tl-nudge": m.nudgeX,
                         "--tl-nudge-sm": m.nudgeXMobile,
+                        "--tl-gap": m.gap,
                       } as CSSProperties
                     }
                   >
-                    <p className="m-0 text-[0.68rem] leading-[1.15] font-semibold tracking-[-0.02em] text-white min-[860px]:text-[0.95rem] min-[860px]:leading-none">
+                    <p className="m-0 text-[0.68rem] leading-[1.15] font-semibold tracking-[-0.02em] text-white min-[860px]:text-[1.02rem] min-[860px]:leading-none">
                       {m.role}
                     </p>
-                    <p className="mt-1 m-0 flex flex-wrap items-center justify-center gap-x-1 text-[0.58rem] leading-tight text-white/65 min-[860px]:flex-nowrap min-[860px]:text-[0.72rem]">
+                    <p className="mt-1 m-0 flex flex-wrap items-center justify-center gap-x-1 text-[0.58rem] leading-tight text-white/65 min-[860px]:flex-nowrap min-[860px]:text-[0.8rem]">
                       {m.company}
                       <span className="tracking-[0.02em] text-white/50">({m.period})</span>
                     </p>
-                    <p className="mt-1 m-0 text-[0.58rem] leading-[1.3] text-white/60 min-[860px]:mt-2 min-[860px]:text-[0.74rem] min-[860px]:leading-[1.4]">
+                    <p className="mt-1 m-0 text-[0.58rem] leading-[1.3] text-white/60 min-[860px]:mt-2 min-[860px]:text-[0.82rem] min-[860px]:leading-[1.4]">
                       {m.blurb}
                     </p>
                   </div>

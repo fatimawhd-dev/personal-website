@@ -8,6 +8,27 @@ import { sectionLabel } from "@/lib/ui";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const aboutEmphasis = [
+  "4+ years of experience",
+  "AI-driven and cross-platform development",
+];
+
+function emphasize(text: string) {
+  const pattern = new RegExp(
+    `(${aboutEmphasis.map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+    "g",
+  );
+  return text.split(pattern).map((part, i) =>
+    aboutEmphasis.includes(part) ? (
+      <strong key={i} className="font-bold text-accent">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function About() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -54,7 +75,7 @@ export function About() {
           <div data-about-anim className="mt-10 max-w-3xl space-y-4 opacity-0">
             {site.about.map((p) => (
               <p key={p.slice(0, 24)} className="leading-relaxed text-(--fg-muted)">
-                {p}
+                {emphasize(p)}
               </p>
             ))}
           </div>

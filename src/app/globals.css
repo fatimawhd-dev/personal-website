@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #061428;
   --bg-deep: #030b18;
-  --bg-soft: #0b1c36;
   --white: #ffffff;
   --fg: #f4f7fb;
   --fg-muted: #f4f7fbb8;
@@ -11,7 +9,6 @@
   --ink: #0a1628;
   --ink-muted: #4a5a70;
   --accent: #ff4f2d;
-  --accent-soft: #ff7a61;
   --line: rgba(244, 247, 251, 0.14);
   --line-dark: rgba(10, 22, 40, 0.12);
   --glass: rgba(255, 255, 255, 0.08);
@@ -19,7 +16,6 @@
 }
 
 @theme inline {
-  --color-bg: var(--bg);
   --color-fg: var(--fg);
   --color-accent: var(--accent);
   --color-ink: var(--ink);
