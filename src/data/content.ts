@@ -177,29 +177,29 @@ export const services = [
     title: "Frontend Development",
     tone: "coral" as const,
     description:
-      "I build polished, high-performance interfaces with React and Next.js — responsive layouts, thoughtful interactions, and code that stays maintainable as products grow.",
-    features: ["Responsive Interfaces", "Motion & Interactions", "Performance"],
+      "I build polished, high-performance interfaces with React, Next.js, and TypeScript — responsive across desktop and mobile, with motion and code that stays maintainable as products grow.",
+    features: ["React, Next.js & TypeScript", "Responsive Web & Mobile UI", "Motion & Performance"],
   },
   {
     title: "Backend Development",
     tone: "sand" as const,
     description:
       "I design APIs and services that stay reliable under load — clean data models, secure auth, and integrations that make the product feel seamless end to end.",
-    features: ["APIs & Services", "Data Architecture", "Reliability"],
+    features: ["Python & .NET", "Postgres, Firebase & Supabase", "Authentication & APIs"],
   },
   {
-    title: "UI/UX Development",
+    title: "Cloud & Deployment",
     tone: "teal" as const,
     description:
-      "I turn product goals into clear flows and interfaces — from wireframes to production-ready UI — so every screen feels intentional, accessible, and easy to ship.",
-    features: ["Product Flows", "Design Systems", "Accessible UI"],
+      "I set up hosting and release pipelines so products ship cleanly and stay available — containers, cloud infra, and deploys that scale with traffic.",
+    features: ["Docker & Containers", "AWS Cloud Infrastructure", "Vercel Deploys & CI/CD"],
   },
   {
-    title: "Websites and Mobile Apps",
+    title: "UX & Tooling",
     tone: "ink" as const,
     description:
-      "I create custom-coded websites and apps specifically for your brand. I focus on making sure they are scalable, fast, accessible, and have engaging animations to provide a memorable experience for users.",
-    features: ["Modern Websites", "Motion & Animations", "Scalability"],
+      "I turn product goals into clear flows and shippable UI — from Figma prototypes to production-ready interfaces, with a design-to-code workflow teams can trust.",
+    features: ["Figma UI/UX Design", "Design Systems & Flows", "GitHub & VS Code Workflow"],
   },
 ];
 

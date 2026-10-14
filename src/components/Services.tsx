@@ -19,8 +19,8 @@ const tonePos: Record<(typeof services)[number]["tone"], string> = {
 const serviceArt: Record<(typeof services)[number]["tone"], string> = {
   coral: "/services/frontend.png",
   sand: "/services/backend.png",
-  teal: "/services/full-stack.png",
-  ink: "/services/websites-and-mobile.png",
+  teal: "/services/cloud.png",
+  ink: "/services/ux-and-tools.png",
 };
 
 function Doodle({ tone }: { tone: (typeof services)[number]["tone"] }) {
