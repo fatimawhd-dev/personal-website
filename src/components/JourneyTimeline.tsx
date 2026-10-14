@@ -3,7 +3,7 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { display, sectionHeading, sectionLabel } from "@/lib/ui";
+import { sectionHeading, sectionLabel } from "@/lib/ui";
 import { experience } from "@/data/content";
 
 gsap.registerPlugin(ScrollTrigger);
